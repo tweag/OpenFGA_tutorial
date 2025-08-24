@@ -1,0 +1,20 @@
+model
+  schema 1.1
+
+type user
+
+type editors
+  relations
+    define member: [user]
+
+type folder
+  relations
+    define editor: [editors#member]
+    define reader: [user] or editor
+
+type document
+  relations
+    define parent: [folder]
+    define reader: reader from parent
+    define writer: editor from parent
+    define owner: [user] and editor from parent

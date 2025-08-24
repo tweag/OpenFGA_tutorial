@@ -1,0 +1,34 @@
+[project]
+name = "fga-example"
+version = "0.1.0"
+description = "OpenFGA tutorial"
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.116.1",
+    "openfga-sdk>=0.9.5",
+    "uvicorn>=0.35.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+]
+
+[project.scripts]
+fga-example = "fga_example.cli:cli"
+fga-setup = "fga_example.cli:fga_setup"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"

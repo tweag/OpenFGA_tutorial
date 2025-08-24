@@ -1,0 +1,77 @@
+[
+  {
+    "user": "user:anne_smith",
+    "relation": "member",
+    "object": "editors:team1"
+  },
+  {
+    "user": "user:bob_jones",
+    "relation": "member",
+    "object": "editors:team2"
+  },
+  {
+    "user": "user:clara_zhang",
+    "relation": "member",
+    "object": "editors:team2"
+  },
+  {
+    "user": "editors:team1#member",
+    "relation": "editor",
+    "object": "folder:folder1"
+  },
+  {
+    "user": "editors:team2#member",
+    "relation": "editor",
+    "object": "folder:folder2"
+  },
+  {
+    "user": "user:david_rodriguez",
+    "relation": "reader",
+    "object": "folder:folder1"
+  },
+  {
+    "user": "user:emily_patel",
+    "relation": "reader",
+    "object": "folder:folder2"
+  },
+  {
+    "user": "folder:folder1",
+    "relation": "parent",
+    "object": "document:doc1_1"
+  },
+  {
+    "user": "folder:folder1",
+    "relation": "parent",
+    "object": "document:doc1_2"
+  },
+  {
+    "user": "folder:folder1",
+    "relation": "parent",
+    "object": "document:doc1_3"
+  },
+  {
+    "user": "folder:folder2",
+    "relation": "parent",
+    "object": "document:doc2_1"
+  },
+  {
+    "user": "folder:folder2",
+    "relation": "parent",
+    "object": "document:doc2_2"
+  },
+  {
+    "user": "folder:folder2",
+    "relation": "parent",
+    "object": "document:doc2_3"
+  },
+  {
+    "user": "user:anne_smith",
+    "relation": "owner",
+    "object": "document:doc1_1"
+  },
+  {
+    "user": "user:bob_jones",
+    "relation": "owner",
+    "object": "document:doc2_1"
+  }
+]

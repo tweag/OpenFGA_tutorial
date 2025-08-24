@@ -1,0 +1,44 @@
+
+networks:
+  openfga:
+
+volumes:
+  openfga:
+
+services:
+  migrate:
+    image: openfga/openfga:latest
+    container_name: migrate
+    command: migrate
+    user: nonroot
+    environment:
+      - OPENFGA_DATASTORE_ENGINE=sqlite
+      - OPENFGA_DATASTORE_URI=file:/home/nonroot/openfga.db
+    networks:
+      - openfga
+    volumes:
+      - openfga:/home/nonroot
+
+  openfga:
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    image: openfga/openfga:latest
+    container_name: openfga
+    user: nonroot
+    environment:
+      - OPENFGA_DATASTORE_ENGINE=sqlite
+      - OPENFGA_DATASTORE_URI=file:/home/nonroot/openfga.db
+      - OPENFGA_LOG_FORMAT=json
+    command: run
+    networks:
+      - openfga
+    volumes:
+      - openfga:/home/nonroot
+    ports:
+      # Needed for the http server
+      - "8080:8080"
+      # Needed for the grpc server (if used)
+      - "8081:8081"
+      # Needed for the playground (Do not enable in prod!)
+      - "3000:3000"

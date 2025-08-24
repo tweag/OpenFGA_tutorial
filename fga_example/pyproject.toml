@@ -2,7 +2,7 @@
 name = "fga-example"
 version = "0.1.0"
 description = "OpenFGA tutorial"
-license = { file = "LICENSE" }
+license = { file = "../LICENSE" }
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

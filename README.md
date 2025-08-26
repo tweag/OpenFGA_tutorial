@@ -25,33 +25,45 @@ This repository is organized into two main directories:
    ```
 
 2. **Set up the environment**:
-   Assuming, you use [uv](https://docs.astral.sh/uv/getting-started/installation/) as your package manager:
+
+   **Nix path**
+     Use `nix-shell` combined with `direnv` to automatically set up openfga in the environment. Just change directory to:
+     ```bash
+     cd fga_example
+     direnv allow
+     ```
+
+   **Non-nix path**
+   1. Install uv (instructions)[https://docs.astral.sh/uv/getting-started/installation/]
+
+   2. Install FGA client:
+     Detailed instructions can be found [fga CLI documentation](https://github.com/openfga/cli).
+      - For MacOS users:
+         ```bash
+         brew install openfga/tap/fga
+         ```
+      - For Linux users:
+      Download the .deb, .rpm or .apk packages from the releases page and install them:
+         ```bash
+         sudo apt install ./fga_<version>_linux_<arch>.deb
+         ```
+
+3. **Set up the virtual environment:**
    ```bash
    cd fga_example
    uv venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    uv pip install -e .
    ```
+  
 
-3. **Start the OpenFGA server**:
-   ```bash
-   docker-compose up -d
-   ```
-   For this you make sure that Docker is installed and running on your machine. You may also need to `docker login`.
+4. **Start the OpenFGA server**:
+    ```bash
+    docker-compose up -d
+    ```
+    For this you make sure that Docker is installed and running on your machine. You may also need to `docker login`.
 
-4. **Install FGA client**:
-   Detailed instructions can be found [fga CLI documentation](https://github.com/openfga/cli).
-   - For MacOS users:
-       ```bash
-       brew install openfga/tap/fga
-       ```
-   - For Linux users:
-   Download the .deb, .rpm or .apk packages from the releases page and install them:
-      ```bash
-       sudo apt install ./fga_<version>_linux_<arch>.deb
-       ```
 
-    You can also use `nix-shell` to automatically set up openfga in the environment.
 
 5. **Initialize the OpenFGA store and model**:
    ```bash

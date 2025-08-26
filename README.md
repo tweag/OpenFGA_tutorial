@@ -25,23 +25,56 @@ This repository is organized into two main directories:
    ```
 
 2. **Set up the environment**:
+
+   **Nix path**
+     Use `nix-shell` combined with `direnv` to automatically set up openfga in the environment. Just change directory to:
+     ```bash
+     cd fga_example
+     direnv allow
+     ```
+
+   **Non-nix path**
+   1. Install uv (instructions)[https://docs.astral.sh/uv/getting-started/installation/]
+
+   2. Install FGA client:
+     Detailed instructions can be found [fga CLI documentation](https://github.com/openfga/cli).
+      - For MacOS users:
+         ```bash
+         brew install openfga/tap/fga
+         ```
+      - For Linux users:
+      Download the .deb, .rpm or .apk packages from the releases page and install them:
+         ```bash
+         sudo apt install ./fga_<version>_linux_<arch>.deb
+         ```
+
+3. **Set up the virtual environment:**
    ```bash
    cd fga_example
    uv venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    uv pip install -e .
    ```
+  
 
-3. **Start the OpenFGA server**:
-   ```bash
-   docker-compose up -d
-   ```
+4. **Start the OpenFGA server**:
+    ```bash
+    docker-compose up -d
+    ```
+    For this you make sure that Docker is installed and running on your machine. You may also need to `docker login`.
 
-4. **Initialize the OpenFGA store and model**:
+
+
+5. **Initialize the OpenFGA store and model**:
    ```bash
    fga-setup
    ```
-   Add the update environment variables.
+   
+6. Add the update environment variables to your `.env` file:
+   ```
+   FGA_STORE_ID=XXXXX
+   FGA_MODEL_ID=YYYYY
+   ```
 
 ## Understanding the Model
 

@@ -97,6 +97,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.direnv
 .env
 .venv
 env/
@@ -125,5 +126,3 @@ dmypy.json
 
 # macOS system files
 .DS_Store
-
-.direnv/

@@ -51,6 +51,8 @@ This repository is organized into two main directories:
        sudo apt install ./fga_<version>_linux_<arch>.deb
        ```
 
+    You can also use `nix-shell` to automatically set up openfga in the environment.
+
 5. **Initialize the OpenFGA store and model**:
    ```bash
    fga-setup

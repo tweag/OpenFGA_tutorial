@@ -49,7 +49,7 @@ docker-compose up -d
 ### Accessing the Services
 
 - **OpenFGA API**: http://localhost:8080
-- **OpenFGA Playground**: http://localhost:3000
+- **OpenFGA Playground**: http://localhost:3000/playground
 
 ### Stopping the Services
 

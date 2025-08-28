@@ -17,61 +17,61 @@
   {
     "user": "editors:team1#member",
     "relation": "editor",
-    "object": "folder:folder1"
+    "object": "folder:2"
   },
   {
     "user": "editors:team2#member",
     "relation": "editor",
-    "object": "folder:folder2"
+    "object": "folder:1"
   },
   {
     "user": "user:david_rodriguez",
     "relation": "reader",
-    "object": "folder:folder1"
+    "object": "folder:2"
   },
   {
     "user": "user:emily_patel",
     "relation": "reader",
-    "object": "folder:folder2"
+    "object": "folder:1"
   },
   {
-    "user": "folder:folder1",
+    "user": "folder:2",
     "relation": "parent",
-    "object": "document:doc1_1"
+    "object": "document:2"
   },
   {
-    "user": "folder:folder1",
+    "user": "folder:2",
     "relation": "parent",
-    "object": "document:doc1_2"
+    "object": "document:1"
   },
   {
-    "user": "folder:folder1",
+    "user": "folder:2",
     "relation": "parent",
-    "object": "document:doc1_3"
+    "object": "document:3"
   },
   {
-    "user": "folder:folder2",
+    "user": "folder:1",
     "relation": "parent",
-    "object": "document:doc2_1"
+    "object": "document:6"
   },
   {
-    "user": "folder:folder2",
+    "user": "folder:1",
     "relation": "parent",
-    "object": "document:doc2_2"
+    "object": "document:5"
   },
   {
-    "user": "folder:folder2",
+    "user": "folder:1",
     "relation": "parent",
-    "object": "document:doc2_3"
+    "object": "document:4"
   },
   {
     "user": "user:anne_smith",
     "relation": "owner",
-    "object": "document:doc1_1"
+    "object": "document:2"
   },
   {
     "user": "user:bob_jones",
     "relation": "owner",
-    "object": "document:doc2_1"
+    "object": "document:6"
   }
 ]

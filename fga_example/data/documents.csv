@@ -1,7 +1,7 @@
-name,data,created_at,is_published
-doc1_2,Content for doc1_2,2025-08-11 07:19:32,false
-doc1_1,Content for doc1_1,2025-08-12 07:19:32,true
-doc1_3,Content for doc1_3,2025-08-13 07:19:32,false
-doc2_3,Content for doc2_3,2025-08-14 07:19:32,true
-doc2_2,Content for doc2_2,2025-08-15 07:19:32,false
-doc2_1,Content for doc2_1,2025-08-16 07:19:32,true
+id,title,data,created_at,is_published
+1,Behavioral Survey Results,Statistical analysis of participant responses to behavioral stimuli,2025-08-11 07:19:32,false
+2,Conditioning Experiment Data,Primary data from classical conditioning experiment with control group,2025-08-12 07:19:32,true
+3,Behavioral Therapy Methods,Review of modern behavioral therapy approaches and effectiveness rates,2025-08-13 07:19:32,false
+4,Memory Formation Study,Research on short-term to long-term memory conversion mechanisms,2025-08-14 07:19:32,true
+5,Attention Span Analysis,Data collection on factors affecting attention span in adults,2025-08-15 07:19:32,false
+6,Cognitive Bias Research,Documentation of common cognitive biases in decision-making processes,2025-08-16 07:19:32,true

@@ -1,3 +1,3 @@
-name,description,created_at
-folder2,Description for folder2,2025-07-27 07:19:32
-folder1,Description for folder1,2025-07-28 07:19:32
+id,title,description,created_at
+1,Cognitive Studies,Research materials for cognitive psychology experiments,2025-07-27 07:19:32
+2,Behavioral Analysis,Data collection for behavioral psychology research,2025-07-28 07:19:32

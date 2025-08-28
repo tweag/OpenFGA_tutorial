@@ -21,10 +21,10 @@ Each exercise includes:
 ## Exercises Overview
 
 1. **Basic Check Access** - Learn to check if a user has access to a resource
-2. **Adding Relationships** - Add new relationship tuples to the authorization model
-3. **Extended Authorization Model** - Modify the model.fga file to add new types and relations
-4. **Custom Authorization Logic** - Implement conditional authorization checks
-5. **Troubleshooting Access** - Debug authorization issues using the FGA check explanation API
+2. **List Accessible Documents** - List all documents to which a user has read or write access
+3. **Who Can Access a Document** - Determine all users who can access a specific document
+4. **Authorization for Document Service** - Integrate authorization with the document service
+5. **Conditional Document Access** - Extend the FGA model to support conditioning based on document publication status
 
 ## How to Use These Exercises
 
@@ -38,6 +38,6 @@ Each exercise includes:
 
 - **OpenFGA Documentation**: [https://openfga.dev/docs](https://openfga.dev/docs) - Official documentation with concepts, guides, and API references
 - **Python SDK**: [https://github.com/openfga/python-sdk](https://github.com/openfga/python-sdk) - Official Python SDK for interacting with OpenFGA
-- **GirHub discussions**: [https://github.com/orgs/openfga/discussions](https://github.com/orgs/openfga/discussions) - Get help from the OpenFGA community
+- **GitHub discussions**: [https://github.com/orgs/openfga/discussions](https://github.com/orgs/openfga/discussions) - Get help from the OpenFGA community
 
 Happy learning!

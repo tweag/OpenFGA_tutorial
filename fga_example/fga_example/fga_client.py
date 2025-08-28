@@ -1,34 +1,25 @@
 """
-OpenFGA client script to demonstrate basic operations with OpenFGA.
+OpenFGA client script to handle core OpenFGA communication operations.
 
-This script contains separate functions for:
-1. Initializing a store
-2. Initializing the authorization model from model.fga file using the OpenFGA CLI
-3. Writing tuples to the authorization model
+This script contains the core functions for:
+1. Reading the authorization model file
+2. Getting the project root path
+3. Initializing the authorization model
+4. Writing tuples to the authorization model
 
 All operations are performed asynchronously.
 """
 
 import os
-import asyncio
-import json
 import subprocess
+import re
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 from openfga_sdk import (
     OpenFgaClient,
     ClientConfiguration,
-    CreateStoreRequest,
-    WriteAuthorizationModelRequest)
+    CreateStoreRequest)
 from openfga_sdk.client.models import ClientTuple, ClientWriteRequest
-
-
-# configuration = ClientConfiguration(
-#     api_url=FGA_API_URL,  # required
-#     store_id=FGA_STORE_ID,  # optional, not needed when calling `CreateStore` or `ListStores`
-#     authorization_model_id=FGA_MODEL_ID,  # Optional, can be overridden per request
-# )
-    
 
 
 def read_model_file(file_path):
@@ -119,7 +110,6 @@ async def initialize_authorization_model(model_path=None, store_id=None, api_url
     output = result.stdout
     
     # Try to parse the authorization model ID from the output
-    import re
     match = re.search(r'([0-9A-Z]{26})', output)
     if match:
         auth_model_id = match.group(1)
@@ -132,7 +122,6 @@ async def initialize_authorization_model(model_path=None, store_id=None, api_url
     print(f"FGA_STORE_ID={store_id}")
     print(f"FGA_MODEL_ID={auth_model_id}")
     return auth_model_id
-        
 
 
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
@@ -141,9 +130,7 @@ async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     
     Args:
         client: OpenFgaClient instance
-        user: User identifier
-        relation: Relation identifier
-        object_: Object identifier
+        to_write: List of dicts with user, relation, object keys
         
     Returns:
         The write response
@@ -154,7 +141,6 @@ async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
                            object=t["object"])
                 for t in to_write]
  
-
     options = { "authorization_model_id": client.get_authorization_model_id()}
     
     # Use the client directly - the SDK handles session management internally
@@ -163,43 +149,3 @@ async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     )
 
     return write_response
-
-
-
-
-async def project_init():
-    """Set up the project with a new store, authorization model and example tuples."""
-    api_url = os.environ.get("OPENFGA_API_URL", "http://localhost:8080")
-    
-    # Step 1: Initialize store
-    store_id = await initialize_store(api_url=api_url, store_name="Nice model store 123")
-    print(f"Store initialized with ID: {store_id}")
-    
-    # Step 2: Initialize authorization model
-    auth_model_id = await initialize_authorization_model(store_id=store_id, api_url=api_url)
-    print(f"Authorization model initialized with ID: {auth_model_id}")
-    
-    client = OpenFgaClient(ClientConfiguration(api_url=api_url, store_id=store_id, authorization_model_id=auth_model_id))
-    # Step 3: Add tuples
-    # Read tuples from the sample_tuples.json file
-    sample_tuples_path = get_project_root() / "fga_example" / "sample_tuples.json"
-    with open(sample_tuples_path, 'r') as file:
-        sample_tuples = json.load(file) 
-
-    write_response = await write_tuples(
-        client=client,
-        to_write=sample_tuples
-    )
-    
-    print("All operations completed successfully!")
-
-    await client.close()  # Close the client session when done
-
-
-def main():
-    """Entry point for the script that runs the async initialize project function."""
-    asyncio.run(project_init())
-
-
-if __name__ == "__main__":
-    main()

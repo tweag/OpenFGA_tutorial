@@ -23,31 +23,23 @@ Check the following access scenarios:
 
 ## Instructions
 
-1. Create a new file `check_access.py` in the fga_example folder
-2. Implement a function that uses the OpenFGA SDK to check if a user has read access to a document
-3. Test with the users and documents listed in the scenario
+1. Implement a function that uses the OpenFGA SDK to check if a user has read access to a document `check_access` in fga_client.py.
+2. [optional] Implement `batch_check_access` function.
+3. Create a new file `check_access.py` in the fga_example folder and test with the users and documents listed in the scenario
 4. Run your script and verify the results
 
 ## Hints
 
-- Use the `openfga_sdk` library to create a client:
-  ```python
-  from openfga_sdk import OpenFgaClient, ClientConfiguration
-  ```
-
-- The check function in the SDK looks like:
-  ```python
-  check_response = await client.check({
-      "user": f"user:{user}",
-      "relation": "reader",
-      "object": f"document:{document}"
-  })
-  ```
-
-- Don't forget to handle the async nature of the SDK
+- (Check SDK documentation)[https://github.com/openfga/python-sdk/tree/main?tab=readme-ov-file#check]
+- (Batch check SDK documentation)[https://github.com/openfga/python-sdk/tree/main?tab=readme-ov-file#batch-check]
 
 ## Solution
 
-The solution for this exercise is currently TBA (To Be Announced).
+The solution for this exercise demonstrates how to check if a user has access to a specific document using OpenFGA's Python SDK.
 
-Good luck!
+You can find the complete solution code in: `/exercises/solutions/exercise1.py`
+
+This solution implements:
+- A `check_access` function to verify if a user has a specific relation to an object
+- A `batch_check_access` function for efficient batch processing
+- A main script that demonstrates checking access for multiple user/document combinations

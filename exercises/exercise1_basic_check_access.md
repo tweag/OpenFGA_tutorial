@@ -13,13 +13,13 @@ Your tasks:
 
 Using the existing authorization model with:
 - Users: anne_smith, bob_jones, clara_zhang, david_rodriguez, emily_patel
-- Documents: doc1_1, doc1_2, doc1_3, doc2_1, doc2_2, doc2_3
+- Documents: document:1, document:2, document:3, document:4, document:5, document:6
 
 Check the following access scenarios:
-- Can anne_smith read doc1_1?
-- Can bob_jones read doc1_2?
-- Can david_rodriguez read doc2_1?
-- Can emily_patel read doc1_3?
+- Can anne_smith read document:1?
+- Can bob_jones read document:2?
+- Can david_rodriguez read document:3?
+- Can emily_patel read document:4?
 
 ## Instructions
 

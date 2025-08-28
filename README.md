@@ -34,7 +34,7 @@ This repository is organized into two main directories:
      ```
 
    **Non-nix path**
-   1. Install uv (instructions)[https://docs.astral.sh/uv/getting-started/installation/]
+   1. Install uv [instructions](https://docs.astral.sh/uv/getting-started/installation/)
 
    2. Install FGA client:
      Detailed instructions can be found [fga CLI documentation](https://github.com/openfga/cli).

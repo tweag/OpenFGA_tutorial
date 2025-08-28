@@ -28,6 +28,6 @@ Using the existing authorization model with users and documents from the system:
 
 ## Solution
 
-Check the `solutions/exercise2_solution.py` file after you've completed your implementation.
+The solution for this exercise is currently TBA (To Be Announced).
 
 Good luck!

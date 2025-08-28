@@ -27,6 +27,6 @@ You need to audit access to several important documents in your system:
 
 ## Solution
 
-Check the `solutions/exercise3_solution.py` file after you've completed your implementation.
+The solution for this exercise is currently TBA (To Be Announced).
 
 Good luck!

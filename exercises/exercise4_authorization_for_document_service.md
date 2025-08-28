@@ -26,44 +26,6 @@ The document service currently returns all documents without any authorization c
 
 ## Hints
 
-- Create an authorized version of the document retrieval function:
-  ```python
-  async def get_document_by_id_authorized(client, user, document_id):
-      # First check if the user has permission
-      check_response = await client.check({
-          "user": f"user:{user}",
-          "relation": "reader",
-          "object": f"document:{document_id}"
-      })
-      
-      if not check_response.allowed:
-          return None  # Or raise a custom unauthorized exception
-      
-      # If authorized, get the document
-      return get_document_by_id(document_id)
-  ```
-
-- For search results, filter after retrieving from the database:
-  ```python
-  async def search_documents_authorized(client, user, search_term):
-      # First get all matching documents
-      all_results = search_documents(search_term)
-      
-      # Then filter based on permissions
-      authorized_results = []
-      for doc in all_results:
-          check_response = await client.check({
-              "user": f"user:{user}",
-              "relation": "reader",
-              "object": f"document:{doc['id']}"
-          })
-          
-          if check_response.allowed:
-              authorized_results.append(doc)
-              
-      return authorized_results
-  ```
-
 - Remember to handle the async nature of the OpenFGA SDK when integrating with the synchronous document service functions
 
 ## Solution

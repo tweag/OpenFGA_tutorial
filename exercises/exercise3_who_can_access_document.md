@@ -25,40 +25,6 @@ You need to audit access to several important documents in your system:
 
 ## Hints
 
-- You'll need to check each user's access to the document:
-  ```python
-  async def list_users_with_access(client, document_id, relation):
-      users_with_access = []
-      # Get users from users.csv or hardcode the list
-      user_list = ["anne_smith", "bob_jones", "clara_zhang", "david_rodriguez", "emily_patel"]
-      
-      for user in user_list:
-          check_response = await client.check({
-              "user": f"user:{user}",
-              "relation": relation,
-              "object": f"document:{document_id}"
-          })
-          if check_response.allowed:
-              users_with_access.append(user)
-              
-      return users_with_access
-  ```
-
-- Consider creating a combined report function:
-  ```python
-  async def generate_document_access_report(client, document_id):
-      readers = await list_users_with_access(client, document_id, "reader")
-      writers = await list_users_with_access(client, document_id, "writer")
-      owners = await list_users_with_access(client, document_id, "owner")
-      
-      return {
-          "document_id": document_id,
-          "readers": readers,
-          "writers": writers,
-          "owners": owners
-      }
-  ```
-
 ## Solution
 
 Check the `solutions/exercise3_solution.py` file after you've completed your implementation.

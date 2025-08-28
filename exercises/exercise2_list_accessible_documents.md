@@ -25,32 +25,6 @@ Using the existing authorization model with users and documents from the system:
 
 ## Hints
 
-- You'll need to iterate through all document IDs and check access for each:
-  ```python
-  async def list_documents_with_access(client, user, relation):
-      accessible_docs = []
-      # Assuming document IDs 1-6 for simplicity
-      for doc_id in range(1, 7):
-          check_response = await client.check({
-              "user": f"user:{user}",
-              "relation": relation,
-              "object": f"document:{doc_id}"
-          })
-          if check_response.allowed:
-              accessible_docs.append(doc_id)
-      return accessible_docs
-  ```
-
-- Consider creating a combined function that checks both read and write access:
-  ```python
-  async def get_user_document_access(client, user):
-      readable = await list_documents_with_access(client, user, "reader")
-      writable = await list_documents_with_access(client, user, "writer")
-      return {
-          "can_read": readable,
-          "can_write": writable
-      }
-  ```
 
 ## Solution
 

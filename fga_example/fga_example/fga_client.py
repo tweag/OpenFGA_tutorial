@@ -124,6 +124,31 @@ async def initialize_authorization_model(model_path=None, store_id=None, api_url
     return auth_model_id
 
 
+async def check_access(client: OpenFgaClient, user: str, relation: str, object: str) -> bool:
+    """
+    Check if a user has a specific relation to an object.
+    
+    Args:
+        client: OpenFgaClient instance
+        user: The user to check
+        relation: The relation to check (e.g., "viewer", "editor")
+        object: The object to check against (e.g., "document:1")
+    """
+    pass
+
+async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[bool]:
+    """
+    Perform batch access checks asynchronously.
+    
+    Args:
+        client: OpenFgaClient instance
+        checks: List of dicts with user, relation, object keys
+        
+    Returns:
+        List of booleans indicating access results
+    """
+    pass
+
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     """
     Write a tuple to the authorization model asynchronously.

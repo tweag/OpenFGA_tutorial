@@ -48,6 +48,6 @@ Check the following access scenarios:
 
 ## Solution
 
-Check the `solutions/exercise1_solution.py` file after you've completed your implementation.
+The solution for this exercise is currently TBA (To Be Announced).
 
 Good luck!

@@ -30,6 +30,6 @@ The document service currently returns all documents without any authorization c
 
 ## Solution
 
-Check the `solutions/exercise4_solution.py` file after you've completed your implementation.
+The solution for this exercise is currently TBA (To Be Announced).
 
 Good luck!

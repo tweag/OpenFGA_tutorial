@@ -29,6 +29,6 @@ Your document management system needs enhanced authorization rules:
 
 ## Solution
 
-Check the `solutions/exercise5_solution.py` and `solutions/exercise5_model.fga` files after you've completed your implementation.
+The solution for this exercise is currently TBA (To Be Announced).
 
 Good luck!

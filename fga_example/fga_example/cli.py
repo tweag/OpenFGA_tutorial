@@ -5,7 +5,7 @@ import sys
 import asyncio
 
 from fga_example.main import hello, main
-from fga_example.fga_client import project_init
+from fga_example.fga_init import project_init
 
 
 def fga_setup():

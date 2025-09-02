@@ -187,21 +187,7 @@ async def list_users_for_document(client: OpenFgaClient, document_id: str, relat
     Returns:
         List of user IDs who have the specified relation to the document
     """
-    
-    document_object = FgaObject(type="document", id=document_id)
-    
-    # Use list_users to get all users who have the specified relation to the document
-    response = await client.list_users(
-        ClientListUsersRequest(
-            object=document_object,
-            relation=relation,
-            user_filters=[UserTypeFilter(type="user")]
-        )
-    )
-    # Extract just the user IDs from the user objects (remove the "user:" prefix)
-    user_ids = [user.object.id for user in response.users]
-    
-    return user_ids
+    raise NotImplementedError 
 
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     """

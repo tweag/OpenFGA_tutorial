@@ -6,10 +6,34 @@ from the Exercise 3 solution.
 """
 import os
 import asyncio
+from typing import Dict, List
 from openfga_sdk import OpenFgaClient, ClientConfiguration
 
 # Import the user listing functions from the Exercise 3 solution
 from fga_example.fga_client import list_users_for_document
+
+async def get_document_access_report(client: OpenFgaClient, document_id: str) -> Dict[str, List[str]]:
+    """
+    Generate a comprehensive access report for a document.
+    
+    Args:
+        client: OpenFgaClient instance
+        document_id: The document ID to check
+        
+    Returns:
+        Dictionary with keys for different access types and values as lists of users
+    """
+    # Get readers, writers, and owners
+    readers = await list_users_for_document(client, document_id, "reader")
+    writers = await list_users_for_document(client, document_id, "writer")
+    owners = await list_users_for_document(client, document_id, "owner")
+    
+    # Create a comprehensive report
+    return {
+        "readers": readers,
+        "writers": writers,
+        "owners": owners
+    }
 
 async def test_list_users_for_document():
     """Test listing users who can access specific documents."""
@@ -49,9 +73,6 @@ async def test_list_users_for_document():
         # Generate a comprehensive report for document:1
         print("\n=== Comprehensive access report for document:1 ===")
         doc_id = "1"
-        
-        # Import the report function from the Exercise 3 solution
-        from exercises.solutions.exercise3 import get_document_access_report
         
         access_report = await get_document_access_report(client, doc_id)
         

@@ -24,9 +24,8 @@ Check the following access scenarios:
 ## Instructions
 
 1. Implement a function that uses the OpenFGA SDK to check if a user has read access to a document `check_access` in fga_client.py.
-2. [optional] Implement `batch_check_access` function.
-3. Create a new file `check_access.py` in the fga_example folder and test with the users and documents listed in the scenario
-4. Run your script and verify the results
+2. Implement `batch_check_access` function.
+3. Run tests and verify the results
 
 ## Hints
 
@@ -42,4 +41,3 @@ You can find the complete solution code in: `/exercises/solutions/exercise1.py`
 This solution implements:
 - A `check_access` function to verify if a user has a specific relation to an object
 - A `batch_check_access` function for efficient batch processing
-- A main script that demonstrates checking access for multiple user/document combinations

@@ -19,7 +19,18 @@ from openfga_sdk import (
     OpenFgaClient,
     ClientConfiguration,
     CreateStoreRequest)
-from openfga_sdk.client.models import ClientTuple, ClientWriteRequest
+from openfga_sdk.client import ClientCheckRequest
+from openfga_sdk.client.models import (
+    ClientTuple, 
+    ClientWriteRequest, 
+    ClientBatchCheckItem,
+    ClientBatchCheckRequest,
+    ClientListObjectsRequest)
+from openfga_sdk.models.fga_object import FgaObject
+from openfga_sdk.client.models.list_users_request import ClientListUsersRequest
+from openfga_sdk.models.user_type_filter import UserTypeFilter
+
+
 
 
 def read_model_file(file_path):
@@ -134,7 +145,7 @@ async def check_access(client: OpenFgaClient, user: str, relation: str, object: 
         relation: The relation to check (e.g., "viewer", "editor")
         object: The object to check against (e.g., "document:1")
     """
-    pass
+    raise NotImplementedError
 
 async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[bool]:
     """
@@ -147,7 +158,36 @@ async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[
     Returns:
         List of booleans indicating access results
     """
-    pass
+    raise NotImplementedError
+
+
+async def list_documents_for_user(client: OpenFgaClient, user: str, relation: str = "reader") -> List[str]:
+    """
+    List all documents a user has a specific relation to asynchronously.
+    
+    Args:
+        client: OpenFgaClient instance
+        user: The user to check
+        relation: The relation to check (default is "reader")
+        
+    Returns:
+        List of document IDs the user has the specified relation to
+    """
+    raise NotImplementedError
+
+async def list_users_for_document(client: OpenFgaClient, document_id: str, relation: str = "reader") -> List[str]:
+    """
+    List all users who have a specific relation to a document asynchronously.
+    
+    Args:
+        client: OpenFgaClient instance
+        document_id: The document ID to check
+        relation: The relation to check (default is "reader")
+        
+    Returns:
+        List of user IDs who have the specified relation to the document
+    """
+    raise NotImplementedError 
 
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     """

@@ -19,7 +19,14 @@ from openfga_sdk import (
     OpenFgaClient,
     ClientConfiguration,
     CreateStoreRequest)
-from openfga_sdk.client.models import ClientTuple, ClientWriteRequest
+from openfga_sdk.client import ClientCheckRequest
+from openfga_sdk.client.models import (
+    ClientTuple, 
+    ClientWriteRequest, 
+    ClientBatchCheckItem,
+    ClientBatchCheckRequest,
+    ClientListObjectsRequest)
+
 
 
 def read_model_file(file_path):
@@ -134,7 +141,7 @@ async def check_access(client: OpenFgaClient, user: str, relation: str, object: 
         relation: The relation to check (e.g., "viewer", "editor")
         object: The object to check against (e.g., "document:1")
     """
-    pass
+    raise NotImplementedError
 
 async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[bool]:
     """
@@ -147,7 +154,22 @@ async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[
     Returns:
         List of booleans indicating access results
     """
-    pass
+    raise NotImplementedError
+
+
+async def list_documents_for_user(client: OpenFgaClient, user: str, relation: str = "reader") -> List[str]:
+    """
+    List all documents a user has a specific relation to asynchronously.
+    
+    Args:
+        client: OpenFgaClient instance
+        user: The user to check
+        relation: The relation to check (default is "reader")
+        
+    Returns:
+        List of document IDs the user has the specified relation to
+    """
+    raise NotImplementedError
 
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     """

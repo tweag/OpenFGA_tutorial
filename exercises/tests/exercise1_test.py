@@ -10,8 +10,6 @@ from openfga_sdk import OpenFgaClient, ClientConfiguration
 
 # Import the check_access functions from the fga_example package
 from fga_example.fga_client import check_access, batch_check_access
-# # Alternatively, if the functions were in the solution file, you would use:
-# from exercises.solutions.exercise1 import check_access, batch_check_access
 
 async def test_check_access():
     """Test individual and batch access checks for specific user and document combinations."""

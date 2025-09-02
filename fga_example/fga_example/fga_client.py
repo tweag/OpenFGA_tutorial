@@ -171,6 +171,20 @@ async def list_documents_for_user(client: OpenFgaClient, user: str, relation: st
     """
     raise NotImplementedError
 
+async def list_users_for_document(client: OpenFgaClient, document_id: str, relation: str = "reader") -> List[str]:
+    """
+    List all users who have a specific relation to a document asynchronously.
+    
+    Args:
+        client: OpenFgaClient instance
+        document_id: The document ID to check
+        relation: The relation to check (default is "reader")
+        
+    Returns:
+        List of user IDs who have the specified relation to the document
+    """
+    raise NotImplementedError
+
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
     """
     Write a tuple to the authorization model asynchronously.

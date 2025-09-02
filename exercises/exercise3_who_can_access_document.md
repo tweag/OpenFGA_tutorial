@@ -2,12 +2,12 @@
 
 ## Problem Statement
 
-In this exercise, you'll learn how to determine all users who have access to a specific document. This is essentially the reverse of the previous exercise and is useful for auditing and managing document permissions.
+In this exercise, you'll learn how to determine all users who have access to a specific document. 
+This is essentially the reverse of the previous exercise and is useful for auditing and managing document permissions.
 
-Your tasks:
-1. Create a Python script that lists all users who can access a specific document
-2. Implement functions to check both read and write access
-3. Generate a comprehensive access report for a document
+This builds on [list-users](https://openfga.dev/docs/getting-started/perform-list-users) API.
+
+>  The List Users call allows you to retrieve a list of users that have a specific relationship with a given object. This can be used in scenarios such as retrieving users who have access to a resource or managing members in a group.
 
 ## Scenario
 
@@ -18,15 +18,15 @@ You need to audit access to several important documents in your system:
 
 ## Instructions
 
-1. Create a new file `document_access_audit.py` in the fga_example folder
-2. Implement a function that lists all users who can read a specific document
-3. Implement a function that lists all users who can write to a specific document
-4. Create a combined function that generates a complete access report
+1. Implement a function that uses the OpenFGA SDK to list all users that are in a given relationship to a document. Use:  `list_users_for_document` in fga_client.py.
 
 ## Hints
 
+- [List Users documentation](https://openfga.dev/docs/getting-started/perform-list-users)
+- [List Users Python SDK](https://github.com/openfga/python-sdk?tab=readme-ov-file#list-users)
+
 ## Solution
 
-The solution for this exercise is currently TBA (To Be Announced).
+You can find the complete solution code in: `/exercises/solutions/exercise3.py`
 
 Good luck!

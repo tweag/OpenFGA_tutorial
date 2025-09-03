@@ -3,8 +3,9 @@ import os
 import csv
 from typing import List, Optional
 import pathlib
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from openfga_sdk import OpenFgaClient, ClientConfiguration
+from fga_example.fga_client import check_access
 
 class Document(BaseModel):
     """Pydantic model for a document."""
@@ -216,8 +217,8 @@ class AuthorizedDocumentService:
         result = cursor.fetchone()
         
         if result:
-            return Document(**dict(result))
             ## TODO: Add authorization check here
+            return Document(**dict(result))
 
         return None
     

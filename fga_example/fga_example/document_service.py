@@ -201,7 +201,7 @@ class AuthorizedDocumentService:
             authorization_model_id=auth_model_id
         ))
     
-    async def get_document_by_id(self, document_id: int) -> Optional[Document]:
+    async def get_document_by_id(self, user_id:str, document_id: int) -> Optional[Document]:
         """
         Get a document by its ID.
         
@@ -221,7 +221,7 @@ class AuthorizedDocumentService:
 
         return None
     
-    def search_documents(self, search_term: str) -> List[Document]:
+    async def search_documents(self, user_id:str, search_term: str) -> List[Document]:
         """
         Search for documents containing the given term in title or data.
         

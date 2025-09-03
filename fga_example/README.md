@@ -71,7 +71,6 @@ docker-compose down -v
 - `fga_example/sample_tuples.json` - Sample relationship tuples for the model
 - `fga_example/fga_client.py` - Client library for interacting with OpenFGA
 - `fga_example/cli.py` - Command-line interface for the project
-- `fga_example/main.py` - Core functionality
 - `fga_example/document_service.py` - Service for accessing document data
 
 ## Document Service
@@ -84,34 +83,6 @@ The project includes a document service (`fga_example/document_service.py`) that
 - Search for documents based on text content
 - Auto-initialization of database from CSV data
 
-### Example Usage
-
-```python
-# Retrieve a specific document by ID
-from fga_example.document_service import get_document_by_id
-
-doc_id = 2
-document = get_document_by_id(doc_id)
-if document:
-    print(f"Title: {document['title']}")
-    print(f"Data: {document['data']}")
-    print(f"Created at: {document['created_at']}")
-    print(f"Published: {document['is_published']}")
-
-# Search for documents containing a term
-from fga_example.document_service import search_documents
-
-search_term = "Report"
-results = search_documents(search_term)
-for doc in results:
-    print(f"- {doc['id']}: {doc['title']}")
-```
-
-You can also run the example script to see the document service in action:
-
-```bash
-python example_document_service.py
-```
 
 ## CLI Usage
 
@@ -139,13 +110,6 @@ The model demonstrates relationship-based authorization, including:
 - Inherited permissions (document permissions from folders)
 - Conditional relationships (document owners must also be editors)
 
-## Development
-
-Install development dependencies:
-
-```bash
-uv pip install -e ".[dev]"
-```
 
 ## Development Tools
 

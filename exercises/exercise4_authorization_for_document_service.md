@@ -19,10 +19,8 @@ The document service currently returns all documents without any authorization c
 
 ## Instructions
 
-1. Create a new file `authorized_document_service.py` in the fga_example folder
-2. Implement authorized versions of the document service functions
-3. Add proper error handling for unauthorized access
-4. Create a test script to demonstrate the service with different users
+1. Fill in "TODOs" in `AuthorizedDocumentService` class
+2. Add error handling for unauthorized access with `AuthorizationError`
 
 ## Hints
 
@@ -30,6 +28,6 @@ The document service currently returns all documents without any authorization c
 
 ## Solution
 
-The solution for this exercise is currently TBA (To Be Announced).
+You can find the complete solution code in: `/exercises/solutions/exercise4.py`
 
 Good luck!

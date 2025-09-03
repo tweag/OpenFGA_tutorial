@@ -186,6 +186,7 @@ source = { editable = "." }
 dependencies = [
     { name = "fastapi" },
     { name = "openfga-sdk" },
+    { name = "pydantic" },
     { name = "uvicorn" },
 ]
 
@@ -202,6 +203,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.116.1" },
     { name = "isort", marker = "extra == 'dev'" },
     { name = "openfga-sdk", specifier = ">=0.9.5" },
+    { name = "pydantic", specifier = ">=2.6.0" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "uvicorn", specifier = ">=0.35.0" },
 ]

@@ -1,6 +1,6 @@
 [project]
 name = "fga-example"
-version = "0.1.0"
+version = "0.1.1"
 description = "OpenFGA tutorial"
 license = { file = "../LICENSE" }
 readme = "README.md"
@@ -17,11 +17,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project.optional-dependencies]
-dev = [
-    "pytest",
-    "black",
-    "isort",
-]
+dev = ["pytest", "black", "isort"]
 
 [project.scripts]
 fga-example = "fga_example.cli:cli"

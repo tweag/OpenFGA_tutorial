@@ -31,8 +31,8 @@ Each exercise includes:
 1. Start with exercise 1 and progress in order
 2. Read the problem statement and try to implement the solution
 3. Use the hints if you get stuck
-4. Compare your solution with the reference solution after completing the exercise
-5. Apply what you've learned to your own projects
+4. Use provided tests to verify your implementation, e.g. run `pytest exercises/tests/test_exercise1.py`
+5. Compare your solution with the reference solution after completing the exercise
 
 ## Useful Resources
 

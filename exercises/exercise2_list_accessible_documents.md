@@ -2,7 +2,8 @@
 
 ## Problem Statement
 
-In this exercise, you'll learn how to determine all documents that a specific user has access to. 
+Determine all documents that a specific user has access to.
+
 This builds on [list-objects](https://openfga.dev/api/service#/Relationship%20Queries/ListObjects) API.
 
 > The List Objects API allows you to retrieve all objects of a specified type that a user has a given relationship with. This can be used in scenarios like displaying all documents a user can read or listing resources a user can manage.
@@ -10,6 +11,7 @@ This builds on [list-objects](https://openfga.dev/api/service#/Relationship%20Qu
 ## Scenario
 
 Using the existing authorization model with users and documents from the system:
+
 - Find all documents that `anne_smith` can read
 - Find all documents that `bob_jones` can edit
 - Compare access levels (read vs. write) for `clara_zhang`

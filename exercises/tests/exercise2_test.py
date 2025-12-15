@@ -10,6 +10,10 @@ import os
 import asyncio
 from openfga_sdk import OpenFgaClient, ClientConfiguration
 from openfga_sdk.client import ClientCheckRequest
+from openfga_sdk.client.models import (
+    ClientBatchCheckItem,
+    ClientBatchCheckRequest,
+)
 
 # Import the list_documents_for_user function from the solution file
 from fga_example.fga_client import list_documents_for_user
@@ -55,11 +59,31 @@ async def compare_access_speed(client: OpenFgaClient, user: str):
             check_results.append(doc_id)
     check_time = time.time() - start_time
 
+    # Method 3: Use batch check
+
+    batch_checks = [
+        ClientBatchCheckItem(
+            user=f"user:{user}", relation="reader", object=f"document:{doc_id}"
+        )
+        for doc_id in all_document_ids
+    ]
+    start_time = time.time()
+    batch_checks_results = await client.batch_check(
+        ClientBatchCheckRequest(checks=batch_checks)
+    )
+    batch_check_time = time.time() - start_time
+
     return {
         "list_objects_time": list_objects_time,
         "check_time": check_time,
+        "batch_check_time": batch_check_time,
         "list_objects_documents": documents_list_objects,
         "check_documents": check_results,
+        "batch_check_documents": [
+            result.request.object.split(":", 1)[1]
+            for result in batch_checks_results.result
+            if result.allowed
+        ],
         "documents_match": set(documents_list_objects) == set(check_results),
     }
 
@@ -119,13 +143,18 @@ async def test_list_documents():
             f"List Objects method took: {comparison['list_objects_time']:.6f} seconds"
         )
         print(f"Check method took: {comparison['check_time']:.6f} seconds")
+        print(f"Batch Check method took: {comparison['batch_check_time']:.6f} seconds")
         print(
             f"Speed difference: {comparison['check_time'] / comparison['list_objects_time']:.2f}x slower"
+        )
+        print(
+            f"Speed difference: {comparison['batch_check_time'] / comparison['list_objects_time']:.2f}x slower"
         )
         print(
             f"Documents found by List Objects: {comparison['list_objects_documents']}"
         )
         print(f"Documents found by Check: {comparison['check_documents']}")
+        print(f"Documents found by Batch Check: {comparison['batch_check_documents']}")
         print(f"Results match: {'Yes' if comparison['documents_match'] else 'No'}")
 
     finally:

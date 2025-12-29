@@ -1,3 +1,4 @@
+import functools
 import sqlite3
 import os
 import csv
@@ -185,19 +186,13 @@ def require_authorization(relation: str, object_type: str):
     """
 
     def decorator(func):
+        @functools.wraps(func)
         async def wrapper(self, object_id: int, *args, **kwargs):
-            print(
-                f"Checking authorization for user {self.user_id}, object {object_type}:{object_id}, relation {relation}"
-            )
-            print(self.fga_client)
             has_access = await check_access(
                 client=self.fga_client,
                 user=self.user_id,
                 relation=relation,
                 object=f"{object_type}:{object_id}",
-            )
-            print(
-                f"Authorization check for user {self.user_id} on {object_type}:{object_id} with relation '{relation}': {has_access}"
             )
             if has_access:
                 return await func(self, object_id, *args, **kwargs)
@@ -251,7 +246,7 @@ class AuthorizedDocumentService(DocumentService):
             )
         )
 
-    @require_authorization(relation="read", object_type="document")
+    @require_authorization(relation="reader", object_type="document")
     async def get_document_by_id(self, document_id: int) -> Optional[Document]:
         """
         Get a document by its ID.
@@ -262,7 +257,7 @@ class AuthorizedDocumentService(DocumentService):
         Returns:
             The document as a Document model, or None if not found
         """
-        return super().get_document_by_id(document_id)
+        return await super().get_document_by_id(document_id)
 
     async def search_documents(self, search_term: str) -> List[Document]:
         """

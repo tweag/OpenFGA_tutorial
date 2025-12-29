@@ -122,43 +122,6 @@ type document
 - **Owner**: Has ownership rights (must also be an editor of parent folder)
 - **-**: No access
 
-### Access Details by User
-
-#### Anne Smith
-
-- **Role**: Member of team1, editor of Folder 2
-- **Read access**: Documents 1, 2, 3
-- **Write access**: Documents 1, 2, 3
-- **Ownership**: Document 2
-
-#### Bob Jones
-
-- **Role**: Member of team2, editor of Folder 1
-- **Read access**: Documents 4, 5, 6
-- **Write access**: Documents 4, 5, 6
-- **Ownership**: Document 6
-
-#### Clara Zhang
-
-- **Role**: Member of team2, editor of Folder 1
-- **Read access**: Documents 4, 5, 6
-- **Write access**: Documents 4, 5, 6
-- **Ownership**: None
-
-#### David Rodriguez
-
-- **Role**: Reader of Folder 2
-- **Read access**: Documents 1, 2, 3
-- **Write access**: None
-- **Ownership**: None
-
-#### Emily Patel
-
-- **Role**: Reader of Folder 1
-- **Read access**: Documents 4, 5, 6
-- **Write access**: None
-- **Ownership**: None
-
 ## Implementation Notes
 
 The relationships are defined in `sample_tuples.json` and loaded into OpenFGA during setup. The model enforces:

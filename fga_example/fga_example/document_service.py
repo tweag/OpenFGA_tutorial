@@ -282,7 +282,7 @@ class AuthorizedDocumentService(DocumentService):
         checks = [
             {
                 "user": self.user_id,
-                "relation": "read",
+                "relation": "reader",
                 "object": f"document:{row['id']}",
             }
             for row in results

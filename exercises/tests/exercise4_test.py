@@ -69,7 +69,6 @@ async def authorized_document_service_test():
         print(f"\nUser: {user}, searching for '{search_term}':")
         try:
             results = await app.search_documents(search_term)
-            print(f"\nUser '{user}' searching for '{search_term}':")
             if results:
                 for doc in results:
                     print(f"  - Found document {doc.id}: '{doc.title}'")

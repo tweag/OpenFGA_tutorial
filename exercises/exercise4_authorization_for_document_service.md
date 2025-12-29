@@ -5,6 +5,7 @@
 In this exercise, you'll learn how to integrate OpenFGA authorization with the existing document service. You'll modify the document service to only return documents that a user has permission to access.
 
 Your tasks:
+
 1. Create an authorized version of the document service
 2. Integrate OpenFGA checks with database queries
 3. Filter search results based on user permissions
@@ -13,6 +14,7 @@ Your tasks:
 ## Scenario
 
 The document service currently returns all documents without any authorization checks. You need to:
+
 - Modify `get_document_by_id()` to only return documents the user can read
 - Update `search_documents()` to filter results based on user permissions
 - Return appropriate error messages for unauthorized access attempts

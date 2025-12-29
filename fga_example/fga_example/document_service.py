@@ -5,7 +5,7 @@ from typing import List, Optional
 import pathlib
 from pydantic import BaseModel
 from openfga_sdk import OpenFgaClient, ClientConfiguration
-from fga_example.fga_client import check_access
+from fga_example.fga_client import check_access, batch_check_access
 
 
 class Document(BaseModel):
@@ -186,11 +186,18 @@ def require_authorization(relation: str, object_type: str):
 
     def decorator(func):
         async def wrapper(self, object_id: int, *args, **kwargs):
+            print(
+                f"Checking authorization for user {self.user_id}, object {object_type}:{object_id}, relation {relation}"
+            )
+            print(self.fga_client)
             has_access = await check_access(
                 client=self.fga_client,
                 user=self.user_id,
                 relation=relation,
                 object=f"{object_type}:{object_id}",
+            )
+            print(
+                f"Authorization check for user {self.user_id} on {object_type}:{object_id} with relation '{relation}': {has_access}"
             )
             if has_access:
                 return await func(self, object_id, *args, **kwargs)
@@ -207,7 +214,9 @@ def require_authorization(relation: str, object_type: str):
 class AuthorizedDocumentService(DocumentService):
     """Document service with OpenFGA authorization checks."""
 
-    def __init__(self, user_id: str, db_path: str = ":memory:"):
+    def __init__(
+        self, user_id: str, db_path: str = ":memory:", fga_client: OpenFgaClient = None
+    ):
         """
         Initialize the document service with a SQLite database.
 
@@ -216,10 +225,17 @@ class AuthorizedDocumentService(DocumentService):
             user_id: The ID of the user making requests
         """
         super().__init__(db_path)
-        self.fga_client = None
+        self.fga_client = fga_client
         self.user_id = user_id
 
-    async def initialize_fga_client(self) -> None:
+    @classmethod
+    async def create(cls, user_id: str, db_path: str = ":memory:"):
+        """Factory method to create an instance with initialized FGA client."""
+        fga_client = await cls._initialize_fga_client()
+        return cls(user_id, db_path, fga_client)
+
+    @staticmethod
+    async def _initialize_fga_client() -> None:
         """Initialize the OpenFGA client from environment variables."""
         api_url = os.environ.get("OPENFGA_API_URL", "http://localhost:8080")
         store_id = os.environ.get("FGA_STORE_ID")
@@ -229,13 +245,13 @@ class AuthorizedDocumentService(DocumentService):
             raise ValueError("FGA_STORE_ID environment variable not set")
 
         # Initialize OpenFGA client
-        self.fga_client = OpenFgaClient(
+        return OpenFgaClient(
             ClientConfiguration(
                 api_url=api_url, store_id=store_id, authorization_model_id=auth_model_id
             )
         )
 
-    ## TODO: Add authorization check here
+    @require_authorization(relation="read", object_type="document")
     async def get_document_by_id(self, document_id: int) -> Optional[Document]:
         """
         Get a document by its ID.
@@ -268,8 +284,27 @@ class AuthorizedDocumentService(DocumentService):
 
         results = cursor.fetchall()
 
-        ## TODO: Add authorization check here
-        return [Document(**dict(row)) for row in results]
+        checks = [
+            {
+                "user": f"user:{self.user_id}",
+                "relation": "read",
+                "object": f"document:{row['id']}",
+            }
+            for row in results
+        ]
+
+        batch_results = await batch_check_access(self.fga_client, checks)
+        allowed_document_ids = {
+            int(result.request.object.split(":")[1])
+            for result in batch_results
+            if result.allowed
+        }
+
+        return [
+            Document(**dict(row))
+            for row in results
+            if row["id"] in allowed_document_ids
+        ]
 
     def close(self) -> None:
         """Close the database connection."""

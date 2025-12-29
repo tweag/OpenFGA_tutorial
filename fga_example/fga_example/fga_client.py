@@ -200,9 +200,7 @@ async def list_documents_for_user(
         type="document",
     )
 
-    print(f"List object body: {body}    ")
     response = await client.list_objects(body)
-    print(f"List objects response: {response}")
 
     # Extract document IDs from the response
     # The response contains objects in the format "document:1", "document:2", etc.

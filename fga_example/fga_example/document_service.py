@@ -164,7 +164,7 @@ class DocumentService:
         results = cursor.fetchall()
         return [Document(**dict(row)) for row in results]
 
-    def close(self) -> None:
+    async def close(self) -> None:
         """Close the database connection."""
         if self.conn:
             self.conn.close()
@@ -281,7 +281,7 @@ class AuthorizedDocumentService(DocumentService):
 
         checks = [
             {
-                "user": f"user:{self.user_id}",
+                "user": self.user_id,
                 "relation": "read",
                 "object": f"document:{row['id']}",
             }
@@ -301,7 +301,9 @@ class AuthorizedDocumentService(DocumentService):
             if row["id"] in allowed_document_ids
         ]
 
-    def close(self) -> None:
+    async def close(self) -> None:
         """Close the database connection."""
         if self.conn:
             self.conn.close()
+        if self.fga_client:
+            await self.fga_client.close()

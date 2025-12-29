@@ -36,7 +36,7 @@ async def document_service_test():
             print(f"- {doc.id}: {doc.title}")
     else:
         print("No matching documents found")
-    app.close()
+    await app.close()
 
 
 async def authorized_document_service_test():
@@ -59,13 +59,14 @@ async def authorized_document_service_test():
                 print(f"  - Document {doc_id}: ❌ Access denied - {str(e)}")
             except ValueError as e:
                 print(f"  - Document {doc_id}: ⚠️ Error - {str(e)}")
-        app.close()
+        await app.close()
 
     # Test searching documents for different users
     print("\n2. Testing document search for multiple users:")
     search_term = "Behavioral"
     for user in users:
-        app = AuthorizedDocumentService(user_id=user)
+        app = await AuthorizedDocumentService.create(user_id=user)
+        print(f"\nUser: {user}, searching for '{search_term}':")
         try:
             results = await app.search_documents(search_term)
             print(f"\nUser '{user}' searching for '{search_term}':")
@@ -77,7 +78,7 @@ async def authorized_document_service_test():
         except Exception as e:
             print(f"  - Error during search: {str(e)}")
         finally:
-            app.close()
+            await app.close()
 
     print("\nDemo completed! Note how the results differ based on user permissions.")
 

@@ -145,17 +145,10 @@ async def check_access(
         relation: The relation to check (e.g., "viewer", "editor")
         object: The object to check against (e.g., "document:1")
     """
-    body = ClientCheckRequest(
-        user=f"user:{user}",
-        relation=relation,
-        object=object,
-    )
-
-    response = await client.check(body)
-    return response.allowed
+    raise NotImplementedError
 
 
-async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[dict]:
+async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[bool]:
     """
     Perform batch access checks asynchronously.
 
@@ -166,18 +159,7 @@ async def batch_check_access(client: OpenFgaClient, checks: List[dict]) -> List[
     Returns:
         List of booleans indicating access results
     """
-    formatted_checks = [
-        ClientBatchCheckItem(
-            user=f"user:{check['user']}",
-            relation=check["relation"],
-            object=check["object"],
-        )
-        for check in checks
-    ]
-    response = await client.batch_check(
-        ClientBatchCheckRequest(checks=formatted_checks)
-    )
-    return response.result
+    raise NotImplementedError
 
 
 async def list_documents_for_user(
@@ -212,6 +194,21 @@ async def list_documents_for_user(
     return document_ids
 
 
+# async def list_documents_for_user(client: OpenFgaClient, user: str, relation: str = "reader") -> List[str]:
+#     """
+#     List all documents a user has a specific relation to asynchronously.
+
+#     Args:
+#         client: OpenFgaClient instance
+#         user: The user to check
+#         relation: The relation to check (default is "reader")
+
+#     Returns:
+#         List of document IDs the user has the specified relation to
+#     """
+#     raise NotImplementedError
+
+
 async def list_users_for_document(
     client: OpenFgaClient, document_id: str, relation: str = "reader"
 ) -> List[str]:
@@ -226,20 +223,7 @@ async def list_users_for_document(
     Returns:
         List of user IDs who have the specified relation to the document
     """
-    document_object = FgaObject(type="document", id=document_id)
-
-    # Use list_users to get all users who have the specified relation to the document
-    response = await client.list_users(
-        ClientListUsersRequest(
-            object=document_object,
-            relation=relation,
-            user_filters=[UserTypeFilter(type="user")],
-        )
-    )
-    # Extract just the user IDs from the user objects (remove the "user:" prefix)
-    user_ids = [user.object.id for user in response.users]
-
-    return user_ids
+    raise NotImplementedError
 
 
 async def write_tuples(client: OpenFgaClient, to_write: List[dict]):
